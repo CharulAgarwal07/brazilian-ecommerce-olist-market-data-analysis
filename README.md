@@ -267,5 +267,5 @@ MIT — feel free to use or adapt for your own analysis.
 
 Charul Agarwal
 
-GitHub: https://github.com/YOUR_USERNAME  
-LinkedIn: Add LinkedIn URL
+GitHub: https://github.com/CharulAgarwal07/
+LinkedIn: https://www.linkedin.com/in/charul-agarwal-b4823a281/
