@@ -1,282 +1,267 @@
-# brazilian-ecommerce-olist-market-data-analysis
+# 🛒 Olist Brazilian E-Commerce — Customer Behaviour & Retention Analysis
 
-# Olist E-Commerce Data Analysis
+> Data Analyst Case Study · Habuild · Dataset: [Olist Brazilian E-Commerce Public Dataset](https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce)
+
+---
 
 ## Overview
 
-This project presents a complete exploratory data analysis and statistical investigation of the Brazilian Olist e-commerce dataset.
+This project analyses ~100,000 real orders from Olist — a large Brazilian e-commerce marketplace — spanning **September 2016 to August 2018**. The goal was to surface customer behaviour patterns, test delivery and satisfaction hypotheses, and identify actionable growth levers for a marketing team.
 
-The analysis focuses on:
-
-- Customer retention
-- Delivery performance
-- Review score drivers
-- Geographic inequality
-- Payment behavior
-- Revenue and category trends
-
-The project includes:
-
-- Data cleaning
-- Feature engineering
-- Multi-table joins
-- Statistical hypothesis testing
-- Business recommendations
+The analysis covers:
+- Exploratory data analysis across 9 relational tables
+- Customer retention and cohort behaviour
+- Geographic delivery performance
+- Product category profitability vs satisfaction
+- Statistical hypothesis testing (Mann-Whitney U, Spearman correlation)
+- Two actionable recommendations backed by data
 
 ---
 
-# Dataset
+## Key Findings
 
-Dataset: Brazilian E-Commerce Public Dataset by Olist
-
-Source:  
-https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce
-
-Time Period:
-Sep 2016 – Aug 2018
-
-Dataset Size:
-~100,000 orders
+| Finding | Detail |
+|---|---|
+| 📈 Platform growth | 23× order volume increase in 24 months (300 → 7,000 orders/month) |
+| 😶 Retention crisis | **96.9% of customers ordered only once** — all revenue growth is acquisition-driven |
+| 🚚 Late = 1-star | Late deliveries cause 1-star rate to jump from 7% → 49% (p < 0.0001) |
+| 📍 SP advantage | São Paulo customers get orders in **7 days median** vs 14 days nationally |
+| ⭐ Category winner | Health & beauty: top revenue + top satisfaction — the standout category |
+| ⏱️ 12-day threshold | Review scores stay above 4.2 within 12 days of delivery, then fall sharply |
 
 ---
 
-# Tech Stack
+## Project Structure
 
-- Python
-- Pandas
-- NumPy
-- Matplotlib
-- Seaborn
-- SciPy
-- Jupyter Notebook
-
----
-
-# Project Structure
-
-```text
+```
 olist-analysis/
 │
-├── olist_analysis.ipynb
-├── Habuild_Olist_Report.pdf
-├── README.md
-├── requirements.txt
+├── olist_analysis.ipynb          # Main analysis notebook
 │
-├── plots/
-│   ├── plot_01_monthly_trends.png
-│   ├── plot_02_orders_by_hour.png
+├── data/                         # Place Kaggle CSVs here (not committed)
+│   ├── olist_customers_dataset.csv
+│   ├── olist_orders_dataset.csv
+│   ├── olist_order_items_dataset.csv
+│   ├── olist_products_dataset.csv
+│   ├── olist_order_reviews_dataset.csv
+│   ├── olist_order_payments_dataset.csv
+│   ├── olist_sellers_dataset.csv
+│   ├── olist_geolocation_dataset.csv
+│   └── product_category_name_translation.csv
+│
+├── plots/                        # All generated charts (auto-saved by notebook)
+│   ├── plot_01_monthly_orders_revenue.png
+│   ├── plot_02_hour_weekday.png
 │   ├── plot_03_categories.png
-│   ├── plot_04_geography.png
-│   ├── plot_05_payments.png
+│   ├── plot_04_geo.png
+│   ├── plot_05_payment.png
 │   ├── plot_06_reviews.png
 │   ├── plot_07_retention.png
-│   ├── plot_08_delivery_vs_review.png
-│   ├── plot_09_delivery_threshold.png
-│   ├── plot_10_h1_late_reviews.png
+│   ├── plot_08_value_delivery_review.png
+│   ├── plot_09_h1_late_vs_review.png
+│   ├── plot_10_h2_sp_delivery.png
 │   ├── plot_11_h3_installments_review.png
+│   ├── plot_12_seller_pareto.png
+│   └── plot_13_delivery_window.png
 │
-└── data/   (excluded from GitHub)
+└── Habuild_Report_Final.docx     # 5-page summary report
 ```
 
 ---
 
-# Key Insights
+## Setup & Usage
 
-## 1. Extremely Low Customer Retention
-
-96.9% of customers placed only one order.
-
-Despite rapid revenue growth, the platform relies almost entirely on continuous customer acquisition.
-
-### Retention Distribution
-
-![Retention Analysis](plots/plot_07_retention.png)
-
----
-
-## 2. Delivery Delays Strongly Reduce Review Scores
-
-Late deliveries dramatically increase 1-star reviews and reduce 5-star reviews.
-
-### Late vs On-Time Review Distribution
-
-![Late Delivery Impact](plots/plot_10_h1_late_reviews.png)
-
----
-
-## 3. São Paulo Has Major Logistics Advantage
-
-São Paulo customers receive deliveries significantly faster than the national median.
-
-### Geographic Delivery Performance
-
-![Geographic Analysis](plots/plot_04_geography.png)
-
----
-
-## 4. Delivery Time Has a Critical Threshold
-
-Review scores remain relatively stable until delivery exceeds ~12 days.
-
-After that point, satisfaction drops sharply.
-
-### Delivery Threshold Effect
-
-![Delivery Threshold](plots/plot_09_delivery_threshold.png)
-
----
-
-# Hypothesis Testing
-
-## H1 — Late Delivery Reduces Review Scores
-
-- Test: Mann–Whitney U
-- Result: Statistically significant
-- p-value < 0.0001
-
-Conclusion:
-Late delivery is the strongest controllable driver of customer dissatisfaction.
-
----
-
-## H2 — São Paulo Receives Faster Deliveries
-
-- Test: Mann–Whitney U
-- Result: Significant difference found
-- p-value < 0.0001
-
-Conclusion:
-Geographic inequality creates inconsistent customer experiences.
-
----
-
-## H3 — More Installments Lower Review Scores
-
-- Test: Spearman Correlation
-- Result: Weak negative relationship
-- Practical impact negligible
-
-### Installments vs Review Score
-
-![Installments Analysis](plots/plot_11_h3_installments_review.png)
-
----
-
-# Business Recommendations
-
-## Improve Customer Retention
-
-- Personalized post-purchase campaigns
-- Repeat-purchase incentives
-- Category-based recommendations
-- Win-back campaigns for first-time buyers
-
----
-
-## Improve Delivery SLAs
-
-Focus logistics improvements in:
-
-- AL
-- MA
-- SE
-- PI
-
-These states showed the highest late-delivery rates.
-
----
-
-## Seller-Level Logistics Monitoring
-
-Identify sellers contributing disproportionately to delays and establish stricter delivery SLAs.
-
----
-
-# Visualizations
-
-## Monthly Growth Trends
-
-![Monthly Trends](plots/plot_01_monthly_trends.png)
-
----
-
-## Shopping Behavior by Time
-
-![Shopping Behavior](plots/plot_02_orders_by_hour.png)
-
----
-
-## Product Category Analysis
-
-![Category Analysis](plots/plot_03_categories.png)
-
----
-
-# How to Run
-
-## 1. Clone Repository
-
+### 1. Clone the repo
 ```bash
-git clone https://github.com/YOUR_USERNAME/olist-analysis.git
+git clone https://github.com/your-username/olist-analysis.git
+cd olist-analysis
 ```
 
-## 2. Install Dependencies
-
+### 2. Install dependencies
 ```bash
-pip install -r requirements.txt
+pip install pandas numpy matplotlib seaborn scipy
 ```
 
-## 3. Open Notebook
+### 3. Download the dataset
+Get the data from [Kaggle](https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce), extract all CSVs into the `data/` folder.
 
+### 4. Run the notebook
 ```bash
-jupyter notebook
+jupyter notebook olist_analysis.ipynb
 ```
 
-Open:
+Run all cells top-to-bottom. Charts will be auto-saved as `.png` files in your working directory.
 
-```text
-olist_analysis.ipynb
+---
+
+## Analysis Walkthrough
+
+### Data Model
+
+The dataset is multi-table and relational. All 9 tables were merged into a single master dataframe:
+
+```
+customers ──┐
+orders ──────┼── master dataframe
+items ───────┤   (+ derived cols: delivery_days, delay_days,
+products ────┤    is_late, weekday, hour, cohort_month)
+reviews ─────┤
+payments ────┘
 ```
 
-Run all cells sequentially.
+Derived variables computed per order:
+- `delivery_days` — actual time from purchase to delivery
+- `delay_days` — actual minus estimated delivery (positive = late)
+- `is_late` — boolean flag for late orders
+- `cohort_month` — customer's first purchase month
 
 ---
 
-# Results
+### EDA Highlights
 
-The notebook generates:
+**Monthly growth**
 
-- Clean master analysis dataset
-- Statistical test outputs
-- Business visualizations
-- PNG plot exports
+Orders grew 23× in 24 months. Revenue tracked volume linearly — average order value (~BRL 154) stayed stable throughout. A clear Black Friday spike in November 2017 is visible in both orders and revenue.
+
+**Shopping behaviour**
+
+Orders peak between 10am–4pm on weekdays. Saturday is the weakest day (~31% below Monday). This has a direct implication for when marketing campaigns should be scheduled.
+
+**Category performance**
+
+Health & beauty is the strongest category — top-quartile revenue and highest average review score (~4.4). Bed/bath/table leads in volume but has the lowest satisfaction score (~4.0) among the top 15. Telephony and furniture underperform on satisfaction, likely due to delivery difficulty with large/bulky items.
+
+**Geographic delivery gap**
+
+São Paulo (SP) accounts for 40%+ of orders and delivers in a median of 7 days. Northeast states — Alagoas (AL), Maranhão (MA), Sergipe (SE) — show late delivery rates of 15–20% and delivery windows of 20–30 days. Customers in these states are having a fundamentally different (worse) experience.
+
+**Non-intuitive finding — 96.9% of customers never return**
+
+Despite 23× revenue growth, 96.9% of customers placed exactly one order. The cohort chart shows repeat rates declining from ~7.5% for early cohorts (Jan 2017) to below 1% for 2018 cohorts. All revenue growth is acquisition-driven — there is essentially no organic retention engine.
+
+---
+
+### Hypotheses Tested
+
+#### H1 — Late delivery causes significantly lower review scores
+
+```
+H₀: No difference in review scores between late and on-time orders
+H₁: Late orders receive lower scores (one-tailed)
+Test: Mann-Whitney U (ordinal data, non-normal distribution)
+```
+
+| Group | Avg Review |
+|---|---|
+| On-time | 4.28 |
+| Late | 2.55 |
+
+**p-value: < 0.0001 → Reject H₀**
+
+Late delivery increases the 1-star rate from 7% to 49% and drops the 5-star rate from 62% to 20%. The strongest single controllable predictor of satisfaction in the dataset.
 
 ---
 
-# Learning Outcomes
+#### H2 — SP customers receive faster deliveries than the rest of Brazil
 
-This project improved skills in:
+```
+H₀: SP delivery time = national median
+H₁: SP customers get faster delivery (one-tailed)
+Test: Mann-Whitney U
+```
 
-- Data cleaning
-- Exploratory data analysis
-- Statistical testing
-- Data visualization
-- Business storytelling
-- Customer analytics
+| Group | Median Delivery |
+|---|---|
+| SP | 7 days |
+| Non-SP | 14 days |
+
+**p-value: < 0.0001 → Reject H₀**
+
+SP's entire IQR sits below the national median. The gap is structural — seller concentration in SP creates a first-mile speed advantage that remote states simply don't get.
+
+---
+
+#### H3 (Bonus) — More instalments correlate with lower satisfaction
+
+```
+H₀: No correlation between instalment count and review score
+H₁: Negative correlation (Spearman rank)
+```
+
+| Spearman rho | p-value |
+|---|---|
+| -0.024 | < 0.0001 |
+
+**Technically confirmed, practically unimportant.** The effect size is negligible — review scores are flat across 1–9 instalments. Only a minor dip appears at 10–11 instalments. Delivery time, not payment method, is the dominant satisfaction driver.
 
 ---
 
-# LLM Usage Disclosure
+### Actionables
 
-LLM assistance was used for:
+**1 — Post-purchase retention campaign**
 
-- Python syntax support
-- Debugging
-- Visualization guidance
+Trigger a personalised email 7–10 days after first delivery with category recommendations and a first-repeat-purchase discount (10% off or free shipping, 30-day validity). Segment by review score: 4–5 star customers first, then service recovery messages for 1–2 star customers before any promo.
 
-All findings, interpretations, business insights, and recommendations were independently reviewed and written.
+Rough estimate: lifting repeat rate from 3.1% → 8% on a 5,000-order monthly cohort adds ~BRL 53,000/month in incremental revenue at near-zero acquisition cost.
+
+**2 — Delivery SLA fix for high-late-rate states**
+
+The top 16% of sellers drive 80% of all orders (Pareto curve in notebook). Work with this concentrated group to pre-position inventory closer to northeast customers. Negotiate carrier SLA penalties for AL, MA, SE routes. Set state-specific delivery date estimates on product pages anchored to achievable windows — not the SP-calibrated default.
 
 ---
+
+### Further Exploration
+
+**Is late delivery driven by a concentrated set of sellers or carriers?**
+
+This analysis proves that late delivery destroys satisfaction but doesn't identify *where* the delay originates. If 20% of sellers cause 80% of delays, a targeted quality programme would be far more efficient than broad logistics changes.
+
+Proposed: join `order_items → sellers`, compute per-seller late delivery rates, build a Pareto curve for delay contribution, then apply a logistic regression with features: `seller_id`, `customer_state`, `product_weight_g`, and carrier. All required tables are in the dataset but the carrier-level join was not completed in this analysis.
+
+---
+
+## Tech Stack
+
+| Tool | Use |
+|---|---|
+| Python 3.9+ | Core analysis |
+| pandas | Data loading, merging, derived columns |
+| matplotlib / seaborn | All visualisations |
+| scipy.stats | Mann-Whitney U and Spearman correlation tests |
+| Jupyter Notebook | Analysis environment |
+
+---
+
+## LLM Disclosure
+
+Per the Habuild case study guidelines:
+
+**Claude Sonnet 4 (Anthropic) was used for:**
+- Python/pandas syntax (cells 1–4)
+- matplotlib/seaborn chart formatting (cells 5–13)
+- scipy.stats import syntax for statistical tests (cells 14–16)
+- docx-js JavaScript syntax for generating the Word report
+
+**Claude was NOT used for:**
+- Hypotheses (independently identified from EDA output)
+- Analytical observations and interpretations
+- Business recommendations
+- The non-intuitive retention finding
+- Further exploration framing
+
+---
+
+## Dataset
+
+**Source:** [Olist Brazilian E-Commerce Public Dataset — Kaggle](https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce)
+
+9 tables, ~100k orders, Sep 2016 – Aug 2018. Data is publicly available under a CC BY-NC-SA 4.0 license. Not committed to this repo — download directly from Kaggle and place CSVs in `data/`.
+
+---
+
+## License
+
+MIT — feel free to use or adapt for your own analysis.
 
 # Author
 
