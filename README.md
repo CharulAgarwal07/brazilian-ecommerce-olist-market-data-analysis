@@ -73,8 +73,8 @@ olist-analysis/
 
 ### 1. Clone the repo
 ```bash
-git clone https://github.com/your-username/olist-analysis.git
-cd olist-analysis
+https://github.com/CharulAgarwal07/brazilian-ecommerce-olist-market-data-analysis.git
+cd brazilian-ecommerce-olist-market-data-analysis
 ```
 
 ### 2. Install dependencies
